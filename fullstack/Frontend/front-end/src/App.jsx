@@ -5,7 +5,9 @@ const App = () => {
   const [notes, setnotes] = useState([]);
 
   const fetchNotes = async () => {
-    let { data } = await axios.get("http://localhost:3000/api/notes");
+    let { data } = await axios.get(
+      "http://backend-2-hi6d.onrender.com/api/notes",
+    );
 
     setnotes(data.notes);
   };
@@ -16,10 +18,13 @@ const App = () => {
     console.log(title.value, description.value);
 
     const postNotes = async () => {
-      let { data } = await axios.post("http://localhost:3000/api/notes", {
-        title: title.value,
-        description: description.value,
-      });
+      let { data } = await axios.post(
+        "http://backend-2-hi6d.onrender.com/api/notes",
+        {
+          title: title.value,
+          description: description.value,
+        },
+      );
       console.log(data);
       fetchNotes();
     };
@@ -29,7 +34,7 @@ const App = () => {
   const deleteHandler = (noteId) => {
     const deleteNote = async () => {
       const { data } = await axios.delete(
-        "http://localhost:3000/api/notes/" + noteId,
+        "http://backend-2-hi6d.onrender.com/api/notes/" + noteId,
       );
       console.log(data);
       fetchNotes();
@@ -42,7 +47,7 @@ const App = () => {
     const newDescription = prompt("Enter new description");
     const updateNote = async () => {
       let { data } = await axios.patch(
-        `http://localhost:3000/api/notes/${noteId}`,
+        `http://backend-2-hi6d.onrender.com/api/notes/${noteId}`,
         {
           title: newTitle,
           description: newDescription,
